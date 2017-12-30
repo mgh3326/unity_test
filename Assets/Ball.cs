@@ -6,11 +6,13 @@ public class Ball : MonoBehaviour
 {
     //int count = 1;
     float startingPoint;
+    SphereCollider myCollider;
     bool shouldPrintOver20 = true;
     bool shouldPrintOver30 = true;
     // Use this for initialization
     void Start()
     {
+        myCollider = GetComponent<SphereCollider>();
         Debug.Log("Start");
         startingPoint = transform.position.z;
     }
@@ -18,27 +20,18 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //myCollider.radius += 0.01f;
         float distance;
         distance = transform.position.z - startingPoint;
         //Debug.Log(distance);
-        if(distance>30)
+        if(Input.GetKeyDown(KeyCode.Space))//누르눈 순간
+            //GetKeyUp//떼는 순간
+            //GetKey //눌릴때
         {
-            if (shouldPrintOver30)
-            {
-                Debug.Log("Over 30:" + distance);
-                shouldPrintOver30 = false;
-            }
-
+            //Debug.Log("Space를 눌렀습니다.");
+            GetComponent<Rigidbody>().AddForce(Vector3.up*300);
         }
-        else if(distance>20)
-        {
-            if (shouldPrintOver20)
-            {
-                Debug.Log("Over 20:" + distance);
-                shouldPrintOver20 = false;
-            }
-
-        }
+       
 
 
     }
