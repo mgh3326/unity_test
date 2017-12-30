@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    int count = 1;
+    //int count = 1;
     float startingPoint;
     bool shouldPrintOver20 = true;
     bool shouldPrintOver30 = true;
