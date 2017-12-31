@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    float delta = -0.1f;
+    void OnCollisionEnter(Collision collision)
+    {
+        Vector3 direction = transform.position - collision.gameObject.transform.position;
+        direction = direction.normalized * 1000;
+        collision.gameObject.GetComponent<Rigidbody>().AddForce(direction);
+    }
+    float delta = 0f;
     // Use this for initialization
     void Start()
     {
@@ -15,13 +21,13 @@ public class Obstacle : MonoBehaviour
     void Update()
     {
 
-        float newXposition = transform.position.x + delta;
-        transform.position = new Vector3(newXposition, 2, -7);
-        if (transform.position.x < -3.5)
+        float newXposition = transform.localPosition.x + delta;
+        transform.localPosition = new Vector3(newXposition, transform.localPosition.y, transform.localPosition.z);
+        if (transform.localPosition.x < -3.5)
         {
             delta = 0.1f;
         }
-        else if (transform.position.x > 3.5)
+        else if (transform.localPosition.x > 3.5)
         {
             delta = -0.1f;
         }
